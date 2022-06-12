@@ -8,7 +8,7 @@ namespace RageServer.ChatSystem
     {
         private static int MaxChatId { get; set; }
         private static List<int> AvailableIDs { get; set; }
-        protected int Id { get; }
+        public int Id { get; }
         protected string Name { get; }
         protected List<Player> Players { get; }
         public BaseChat(string Name)
@@ -32,6 +32,11 @@ namespace RageServer.ChatSystem
         {
             AvailableIDs.Add(chat.Id);
             AvailableIDs.Sort();
+        }
+        public void AddPlayerToChat(Player player)
+        {
+            if (Players.Contains(player)) return;
+            Players.Add(player);
         }
         public abstract void SendChatMessage(Player player, string message);
     }

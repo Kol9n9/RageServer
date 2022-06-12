@@ -15,6 +15,8 @@ namespace RageServer
         [ServerEvent(Event.ResourceStart)]
         public void OnResourceStart()
         {
+            NAPI.Server.SetGlobalServerChat(false);
+            NAPI.Server.SetGlobalDefaultCommandMessages(false);
             NAPI.Util.ConsoleOutput("Запуск сервера...");
         }
     }

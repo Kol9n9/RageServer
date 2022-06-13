@@ -16,5 +16,10 @@ namespace RageServer
         {
             
         }
+        [Command("freeze")]
+        private void OnFreezeCommand(Player player, bool status)
+        {
+            NAPI.ClientEvent.TriggerClientEvent(player, "PlayerFreeze", status);
+        }
     }
 }

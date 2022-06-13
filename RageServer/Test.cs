@@ -16,10 +16,5 @@ namespace RageServer
         {
             
         }
-        [ServerEvent(Event.PlayerConnected)]
-        private void OnPlayerConnected(Player player)
-        {
-            player.SendChatMessage("OnPlayerConnected");
-        }
     }
 }

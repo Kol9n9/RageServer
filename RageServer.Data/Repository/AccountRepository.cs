@@ -40,6 +40,11 @@ namespace RageServer.Data.Repository
             return dbContext.Accounts.Find(id);
         }
 
+        public bool IsExist(Expression<Func<AccountModel, bool>> predicate)
+        {
+            return dbContext.Accounts.Find(predicate) != null;
+        }
+
         public void Remove(AccountModel entity)
         {
             dbContext.Accounts.Remove(entity);

@@ -12,6 +12,10 @@
       <OutputPath>C:\RageServer\dotnet\resources\mode\</OutputPath>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\RageServer.Data\RageServer.Data.csproj" />
+    </ItemGroup>
+
   <ItemGroup>
     <Reference Include="Bootstrapper">
       <HintPath>..\..\..\..\..\RageServer\dotnet\runtime\Bootstrapper.dll</HintPath>

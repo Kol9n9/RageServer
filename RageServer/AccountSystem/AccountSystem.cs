@@ -13,7 +13,7 @@ namespace RageServer.AccountSystem
         private static AccountRepository repository = new AccountRepository();
         public static bool CheckIsAccountExist(string Nickname)
         {
-            return repository.IsExist(x => x.Nickname.Equals(Nickname));
+            return repository.IsExist(x => x.Nickname == Nickname);
         }
         public static bool CheckIsAccountLogged(Player GamePlayer)
         {
@@ -21,7 +21,7 @@ namespace RageServer.AccountSystem
         }
         public static bool Login(Player GamePlayer, string Nickname, string Password)
         {
-            var account = repository.Get(x => x.Nickname.Equals(Nickname) && x.Password.Equals(Password));
+            var account = repository.Get(x => x.Nickname == Nickname && x.Password == Password);
             if (account == null) return false;
             GamePlayer.SetOwnSharedData("ID", account.Id);
             AccountList.Add(new Account(account.Id, -1, GamePlayer)

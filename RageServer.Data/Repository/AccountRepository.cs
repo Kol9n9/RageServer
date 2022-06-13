@@ -42,7 +42,7 @@ namespace RageServer.Data.Repository
 
         public bool IsExist(Expression<Func<AccountModel, bool>> predicate)
         {
-            return dbContext.Accounts.Find(predicate) != null;
+            return dbContext.Accounts.FirstOrDefault(predicate) != null;
         }
 
         public void Remove(AccountModel entity)

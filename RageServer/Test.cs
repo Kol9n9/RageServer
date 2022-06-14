@@ -16,10 +16,11 @@ namespace RageServer
         {
             
         }
-        [Command("freeze")]
-        private void OnFreezeCommand(Player player, bool status)
+        [Command("window")]
+        private void OnWindowCommand(Player player, bool status)
         {
-            NAPI.ClientEvent.TriggerClientEvent(player, "PlayerFreeze", status);
+            if (status) NAPI.ClientEvent.TriggerClientEvent(player, "TestWindowShow");
+            else NAPI.ClientEvent.TriggerClientEvent(player, "TestWindowHide");
         }
     }
 }

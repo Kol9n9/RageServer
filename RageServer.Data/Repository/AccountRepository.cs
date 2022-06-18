@@ -34,12 +34,6 @@ namespace RageServer.Data.Repository
         {
             return dbContext.Accounts.Where(predicate);
         }
-
-        public AccountModel GetById(int id)
-        {
-            return dbContext.Accounts.Find(id);
-        }
-
         public bool IsExist(Expression<Func<AccountModel, bool>> predicate)
         {
             return dbContext.Accounts.FirstOrDefault(predicate) != null;

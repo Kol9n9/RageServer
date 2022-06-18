@@ -13,7 +13,6 @@ namespace RageServer.Data.Repository
         IEnumerable<T> GetAll();
         IEnumerable<T> GetAll(Expression<Func<T, bool>> predicate);
         T Get(Expression<Func<T, bool>> predicate);
-        T GetById(int id);
         bool IsExist(Expression<Func<T, bool>> predicate);
     }
 }

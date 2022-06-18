@@ -8,7 +8,16 @@ namespace RageServer.AccountSystem
     {
         public int Id { get; }
         public int GameId { get; }
-        public string Nickname { get; set; }
+        private string nickname;
+        public string Nickname 
+        { 
+            get => nickname; 
+            set 
+            {
+                nickname = value;
+                GamePlayer.Name = value;
+            } 
+        }
         public int Money { get; set; }
         public Player GamePlayer {get;}
         public Account(int Id, int GameId, Player GamePlayer)

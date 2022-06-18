@@ -21,6 +21,11 @@ namespace RageClient.BrowserSystem
         {
             if (currentBrowser == null) return;
             currentBrowser.SetActive(activated);
+            RAGE.Chat.Activate(!activated);
+        }
+        public static void SetCursorShowed(bool status)
+        {
+            RAGE.Ui.Cursor.Visible = status;
         }
     }
 }

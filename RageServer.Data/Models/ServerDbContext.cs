@@ -18,5 +18,6 @@ namespace RageServer.Data.Models
             optionsBuilder.UseMySql(connectionString, ob => ob.MigrationsAssembly(typeof(ServerDbContext).GetTypeInfo().Assembly.GetName().Name));
         }
         public DbSet<AccountModel> Accounts { get; set; }
+        public DbSet<SocialAccountModel> SocialAccounts { get; set; }
     }   
 }

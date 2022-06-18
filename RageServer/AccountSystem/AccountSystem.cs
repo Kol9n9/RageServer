@@ -10,10 +10,11 @@ namespace RageServer.AccountSystem
     public static class AccountSystem
     {
         public static List<Account> AccountList { get; } = new List<Account>();
-        private static AccountRepository repository = new AccountRepository();
+        private static AccountRepository accountRepository = new AccountRepository();
+        private static SocialAccountRepository socialAccountRepository = new SocialAccountRepository();
         public static bool CheckIsAccountExist(string Nickname)
         {
-            return repository.IsExist(x => x.Nickname == Nickname);
+            return accountRepository.IsExist(x => x.Nickname == Nickname);
         }
         public static bool CheckIsAccountLogged(Player GamePlayer)
         {
@@ -21,25 +22,35 @@ namespace RageServer.AccountSystem
         }
         public static bool Login(Player GamePlayer, string Nickname, string Password)
         {
-            var account = repository.Get(x => x.Nickname == Nickname && x.Password == Password);
+            var account = accountRepository.Get(x => x.Nickname == Nickname && x.Password == Password);
             if (account == null) return false;
-            GamePlayer.SetOwnSharedData("ID", account.Id);
-            AccountList.Add(new Account(account.Id, -1, GamePlayer)
+            GamePlayer.SetOwnSharedData("ID", account.AccountId);
+            AccountList.Add(new Account(account.AccountId, -1, GamePlayer)
             {
                 Nickname = account.Nickname,
                 Money = account.Money
             });
             return true;
         }
-        public static bool Register(Player GamePlayer, string Nickname, string Password)
+        public static bool Register(Player GamePlayer, ulong SocialId,  string Nickname, string Password)
         {
+            var socialAccount = new SocialAccountModel
+            {
+                SocialId = SocialId
+            };
+            socialAccountRepository.Add(socialAccount);
             var account = new AccountModel
             {
                 Nickname = Nickname,
-                Password = Password
+                Password = Password,
+                SocialAccountId = socialAccount.SocialAccountId
             };
-            repository.Add(account);
+            accountRepository.Add(account);
             return Login(GamePlayer, Nickname, Password);
+        }
+        public static bool CheckIsSocialAccountExist(ulong socialId)
+        {
+            return socialAccountRepository.IsExist(x => x.SocialId == socialId);
         }
     }
 }

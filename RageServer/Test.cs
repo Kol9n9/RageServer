@@ -16,11 +16,5 @@ namespace RageServer
         {
             
         }
-        [Command("window")]
-        private void OnWindowCommand(Player player, bool status)
-        {
-            if (status) NAPI.ClientEvent.TriggerClientEvent(player, "TestWindowShow");
-            else NAPI.ClientEvent.TriggerClientEvent(player, "TestWindowHide");
-        }
     }
 }

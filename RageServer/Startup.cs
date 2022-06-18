@@ -18,6 +18,7 @@ namespace RageServer
             NAPI.Server.SetGlobalServerChat(false);
             NAPI.Server.SetGlobalDefaultCommandMessages(false);
             NAPI.Util.ConsoleOutput("Запуск сервера...");
+            Vehicles.VehicleSystem.LoadVehicles();
         }
     }
 }

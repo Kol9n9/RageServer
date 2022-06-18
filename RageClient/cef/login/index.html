@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Form</title>
+	<link rel="stylesheet" href="package://cef/login/style.css">
+	<script src="package://cef/lib/jquery.js"></script>
+</head>
+<body>
+	
+	<div class="form">
+		<div id="loginForm" style="display: none;">
+			<h1>Вход</h1>
+			<div class="errors-form" id="errors">
+			</div>
+			<div class="input-form">
+				<input type="text" id="login" placeholder="Логин">
+			</div>
+			<div class="input-form">
+				<input type="password" id="password"  placeholder="Пароль">
+			</div>
+			<div class="input-form">
+				<input type="submit" value="Войти" onclick="login()">
+			</div>
+			<a href="#" class="forget">Забыли пароль?</a>
+		</div>
+		<div id="registerForm" style="display: none;">
+			<h1>Регистрация</h1>
+			<div class="errors-form" id="errors">
+			</div>
+			<div class="input-form">
+				<input type="text" id="login2" placeholder="Логин">
+			</div>
+			<div class="input-form">
+				<input type="password" id="password2" placeholder="Пароль">
+			</div>
+			<div class="input-form">
+				<input type="submit" value="Регистрация" onclick="register()">
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+	function showErrors(errors){
+		let errorBlock = $('#errors');
+		errors.forEach(element => {
+			$(errorBlock).append($('<p>',{}).text(element));
+		});
+	}
+	function clearErrors(){
+		let errorBlock = $('#errors');
+		$(errorBlock).html('');
+	}
+	function showLoginForm(){
+		let loginForm = $('#loginForm');
+		$(loginForm).show(400,"swing");
+	}
+	function login(){
+		let login = $('#login').val();
+		let pass = $('#password').val();
+		mp.trigger('AuthorizationFormLogin',login,pass);
+	}
+	function showRegisterForm(){
+		let registerForm = $('#registerForm');
+		$(registerForm).show(400,"swing");
+	}
+	function register(){
+		let login = $('#login2').val();
+		let pass = $('#password2').val();
+		mp.trigger('AuthorizationFormRegister',login,pass);
+	}
+</script>
+</html>

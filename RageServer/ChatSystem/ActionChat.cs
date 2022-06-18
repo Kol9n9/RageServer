@@ -1,4 +1,5 @@
 ﻿using GTANetworkAPI;
+using RageServer.AccountSystem;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,10 +13,10 @@ namespace RageServer.ChatSystem
         {
             range = Range;
         }
-        public override void SendChatMessage(Player player, string message)
+        public override void SendChatMessage(Account player, string message)
         {
-            string formatedMessage = $"~b~{player.Name} {message}";
-            foreach (var p in Utils.DistanceHelper.GetPlayersForRange(player.Position, range))
+            string formatedMessage = $"~b~{player.Nickname} {message}";
+            foreach (var p in Utils.DistanceHelper.GetPlayersForRange(player.GamePlayer.Position, range))
             {
                 p.SendChatMessage(formatedMessage);
             }

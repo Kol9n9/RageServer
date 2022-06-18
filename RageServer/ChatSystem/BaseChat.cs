@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using GTANetworkAPI;
+using RageServer.AccountSystem;
+
 namespace RageServer.ChatSystem
 {
     public abstract class BaseChat 
@@ -10,12 +12,12 @@ namespace RageServer.ChatSystem
         private static List<int> AvailableIDs { get; set; }
         public int Id { get; }
         protected string Name { get; }
-        protected List<Player> Players { get; }
+        protected List<Account> Players { get; }
         public BaseChat(string Name)
         {
             if (AvailableIDs == null) AvailableIDs = new List<int>();
             this.Name = Name;
-            Players = new List<Player>();
+            Players = new List<Account>();
             Id = GetAvailableId();
         }
         private int GetAvailableId()
@@ -33,11 +35,11 @@ namespace RageServer.ChatSystem
             AvailableIDs.Add(chat.Id);
             AvailableIDs.Sort();
         }
-        public void AddPlayerToChat(Player player)
+        public void AddPlayerToChat(Account player)
         {
             if (Players.Contains(player)) return;
             Players.Add(player);
         }
-        public abstract void SendChatMessage(Player player, string message);
+        public abstract void SendChatMessage(Account player, string message);
     }
 }

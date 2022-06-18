@@ -19,12 +19,14 @@ namespace RageServer.Events
         [ServerEvent(Event.ChatMessage)]
         private void OnChatMessage(Player player, string message)
         {
-            commonChat.SendChatMessage(player, message);
+            if (!AccountSystem.AccountSystem.CheckIsAccountLogged(player)) return;
+            commonChat.SendChatMessage(AccountSystem.AccountSystem.GetAccount(player), message);
         }
         [Command("me",GreedyArg = true)]
         private void OnMeCommand(Player player, string message)
         {
-            actionChat.SendChatMessage(player, message);
+            if (!AccountSystem.AccountSystem.CheckIsAccountLogged(player)) return;
+            actionChat.SendChatMessage(AccountSystem.AccountSystem.GetAccount(player), message);
         }
     }
 }

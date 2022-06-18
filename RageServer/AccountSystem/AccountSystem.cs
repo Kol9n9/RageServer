@@ -20,6 +20,11 @@ namespace RageServer.AccountSystem
         {
             return GamePlayer.GetOwnSharedData<int?>("ID").HasValue;
         }
+        public static Account GetAccount(Player GamePlayer)
+        {
+            int ID = GamePlayer.GetOwnSharedData<int?>("ID").Value;
+            return AccountList.Find(x => x.Id == ID);
+        }
         public static bool Login(Player GamePlayer, string Nickname, string Password)
         {
             var account = accountRepository.Get(x => x.Nickname == Nickname && x.Password == Password);

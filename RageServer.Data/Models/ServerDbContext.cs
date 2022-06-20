@@ -21,6 +21,19 @@ namespace RageServer.Data.Models
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<TeleportMarkModel>()
+                .Property(x => x.SpawnPosition)
+                .HasConversion(new ValueConverter<System.Numerics.Vector3, string>(
+                    v => JsonConvert.SerializeObject(v), // Convert to string for persistence
+                    v => JsonConvert.DeserializeObject<System.Numerics.Vector3>(v) // Convert to List<String> for use
+                 ));
+            modelBuilder.Entity<TeleportMarkModel>()
+                .Property(x => x.Position)
+                .HasConversion(new ValueConverter<System.Numerics.Vector3, string>(
+                    v => JsonConvert.SerializeObject(v), // Convert to string for persistence
+                    v => JsonConvert.DeserializeObject<System.Numerics.Vector3>(v) // Convert to List<String> for use
+                 ));
+
             modelBuilder.Entity<VehicleModel>()
                 .Property(x => x.SpawnPosition)
                 .HasConversion(new ValueConverter<System.Numerics.Vector3, string>(
@@ -31,5 +44,7 @@ namespace RageServer.Data.Models
         public DbSet<AccountModel> Accounts { get; set; }
         public DbSet<SocialAccountModel> SocialAccounts { get; set; }
         public DbSet<VehicleModel> Vehicles { get; set; }
+
+        public DbSet<TeleportMarkModel> TeleportMarks { get; set; }
     }   
 }

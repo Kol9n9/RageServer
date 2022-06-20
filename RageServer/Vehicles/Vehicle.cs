@@ -24,5 +24,11 @@ namespace RageServer.Vehicles
             if (Id != VehicleSystem.INVALID_VEHICLEID) return;
             Id = id;
         }
+        public void SetPosition(Vector3 Position, float Rotation, uint VirtualWorld)
+        {
+            GameVehicle.Position = Position;
+            GameVehicle.Rotation.Z = Rotation;
+            GameVehicle.Dimension = VirtualWorld;
+        }
     }
 }

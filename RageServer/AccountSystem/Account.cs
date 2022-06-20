@@ -26,6 +26,12 @@ namespace RageServer.AccountSystem
             this.GameId = GameId;
             this.GamePlayer = GamePlayer;
         }
+        public void SetPosition(Vector3 Position, float Rotation, uint VirtualWorld)
+        {
+            GamePlayer.Position = Position;
+            GamePlayer.Rotation.Z = Rotation;
+            GamePlayer.Dimension = VirtualWorld;
+        }
         
     }
 }

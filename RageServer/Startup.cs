@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 namespace RageServer
 {
     /// <summary>
@@ -19,6 +16,7 @@ namespace RageServer
             NAPI.Server.SetGlobalDefaultCommandMessages(false);
             NAPI.Util.ConsoleOutput("Запуск сервера...");
             Vehicles.VehicleSystem.LoadVehicles();
+            ColShapes.TeleportMark.LoadMarks();
         }
     }
 }

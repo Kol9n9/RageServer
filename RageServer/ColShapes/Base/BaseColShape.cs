@@ -12,7 +12,7 @@ namespace RageServer.ColShapes.Base
         public ColShape ColShape { get; }
         public float ColShapeRange { get; }
         public float ColShapeHeight { get; }
-        public BaseColShape(int Id, Vector3 Position, uint VirtualWorld, float ColShapeRange = 5, float ColShapeHeight = 5, Action<Player> PlayerEvent = null)
+        public BaseColShape(int Id, Vector3 Position, uint VirtualWorld, float ColShapeRange = 1.5f, float ColShapeHeight = 1.5f, Action<Player> PlayerEvent = null)
         {
             this.Id = Id;
             this.Position = Position;

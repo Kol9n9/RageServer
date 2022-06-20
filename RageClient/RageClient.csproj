@@ -5,6 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\..\RAGEMP\dotnet\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="rage-sharpN">
       <HintPath>..\..\..\..\..\RAGEMP\dotnet\rage-sharpN.dll</HintPath>
     </Reference>

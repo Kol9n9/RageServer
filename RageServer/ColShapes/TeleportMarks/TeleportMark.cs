@@ -8,6 +8,7 @@ namespace RageServer.ColShapes
 {
     public class TeleportMark : BaseColShape
     {
+        public static readonly int INVALID_ID = -1;
         public Vector3 SpawnPosition { get; }
         public float SpawnRotation { get; }
         public uint SpawnVirtualWorld { get; }
@@ -23,7 +24,7 @@ namespace RageServer.ColShapes
             this.SpawnRotation = SpawnRotation;
             this.SpawnVirtualWorld = SpawnVirtualWorld;
             this.TeleportType = TeleportType;
-            marker = NAPI.Marker.CreateMarker(2, this.Position, new Vector3(1, 1, 1), new Vector3(1, 1, 1), 5, new Color(255, 255, 255), dimension: this.VirtualWorld);
+            marker = NAPI.Marker.CreateMarker(1, this.Position, new Vector3(0, 0, 1), new Vector3(0, 0, 1), 1.5f, new Color(255, 255, 255), dimension: this.VirtualWorld);
             this.PlayerEvent = CreatePlayerEvent();
             BaseColShapeSystem.AddColShape(this);
         }
@@ -75,6 +76,28 @@ namespace RageServer.ColShapes
                 new TeleportMark(mark.TeleportMarkId, Utils.Transforms.TransformVectors(mark.Position), mark.VirtualWorld,
                     Utils.Transforms.TransformVectors(mark.SpawnPosition), mark.SpawnRotation, mark.SpawnVirtualWorld, mark.TeleportType);
             }
+        }
+        public static void CreateMark(Vector3 Position, uint VirtualWorld,
+            Vector3 SpawnPosition, float SpawnRotation, uint SpawnVirtualWorld,
+            TeleportTypeEnum TeleportType, bool IsCreateInDB = true)
+        {
+            int id = INVALID_ID;
+            if (IsCreateInDB)
+            {
+                TeleportMarkRepository markRepository = new TeleportMarkRepository();
+                var model = new Data.Models.TeleportMarkModel
+                {
+                    Position = Utils.Transforms.TransformVectors(Position),
+                    VirtualWorld = VirtualWorld,
+                    SpawnPosition = Utils.Transforms.TransformVectors(SpawnPosition),
+                    SpawnRotation = SpawnRotation,
+                    SpawnVirtualWorld = SpawnVirtualWorld,
+                    TeleportType = TeleportType
+                };
+                markRepository.Add(model);
+                id = model.TeleportMarkId;
+            }
+            new TeleportMark(id, Position, VirtualWorld, SpawnPosition, SpawnRotation, SpawnVirtualWorld, TeleportType);
         }
     }
 }

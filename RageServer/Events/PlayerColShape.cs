@@ -1,8 +1,5 @@
 ﻿using GTANetworkAPI;
-using RageServer.ColShapes;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using RageServer.ColShapes.Base;
 
 namespace RageServer.Events
 {

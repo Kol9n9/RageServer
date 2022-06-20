@@ -1,9 +1,7 @@
 ﻿using GTANetworkAPI;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace RageServer.ColShapes
+namespace RageServer.Base.ColShapes
 {
     public abstract class BaseColShape
     {

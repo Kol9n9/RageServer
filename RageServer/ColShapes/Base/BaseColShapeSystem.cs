@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Linq;
-namespace RageServer.ColShapes
+using RageServer.Base.ColShapes;
+
+namespace RageServer.ColShapes.Base
 {
     public static class BaseColShapeSystem
     {

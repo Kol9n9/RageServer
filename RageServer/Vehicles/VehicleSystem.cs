@@ -20,7 +20,7 @@ namespace RageServer.Vehicles
         {
             foreach(var vehicle in vehicleRepository.GetAll())
             {
-                var vector = TransformVectors(vehicle.SpawnPosition);
+                var vector = Utils.Transforms.TransformVectors(vehicle.SpawnPosition);
                 var veh = CreateVehicle(vehicle.Model, vector, vehicle.SpawnRotation, 0, 0);
                 int gameId = GetCurrentGameVehicleId();
                 veh.SetSharedData(KeyID, vehicle.VehicleId);
@@ -30,12 +30,11 @@ namespace RageServer.Vehicles
                     SpawnPosition = vector,
                     SpawnRotation = vehicle.SpawnRotation
                 });
-                //Vehicle veh = new Vehicle(vehicle.VehicleId,vehicle.Model,)
             }
         }
         public static void SaveVehicle(Vehicle vehicle)
         {
-            var vector = TransformVectors(vehicle.SpawnPosition);
+            var vector = Utils.Transforms.TransformVectors(vehicle.SpawnPosition);
             var vehModel = vehicleRepository.Get(x => x.VehicleId == vehicle.Id);
             vehModel.SpawnPosition = vector;
             vehModel.SpawnRotation = vehicle.SpawnRotation;
@@ -51,7 +50,7 @@ namespace RageServer.Vehicles
                 Data.Models.VehicleModel vehicleModel = new Data.Models.VehicleModel()
                 {
                     Model = model,
-                    SpawnPosition = TransformVectors(position),
+                    SpawnPosition = Utils.Transforms.TransformVectors(position),
                     SpawnRotation = rotation
                 };
                 vehicleRepository.Add(vehicleModel);
@@ -92,14 +91,6 @@ namespace RageServer.Vehicles
         private static GTANetworkAPI.Vehicle CreateVehicle(uint Model, Vector3 Position, float Rotation, int Color1, int Color2)
         {
             return NAPI.Vehicle.CreateVehicle(Model, Position, Rotation, Color1, Color2);
-        }
-        private static Vector3 TransformVectors(System.Numerics.Vector3 vector)
-        {
-            return new Vector3(vector.X, vector.Y, vector.Z);
-        }
-        private static System.Numerics.Vector3 TransformVectors(Vector3 vector)
-        {
-            return new System.Numerics.Vector3(vector.X, vector.Y, vector.Z);
         }
         private static int GetCurrentGameVehicleId()
         {
